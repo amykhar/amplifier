@@ -5,6 +5,7 @@
 ## The Problem
 
 You consume valuable content through videos and audio, but:
+
 - **Can't search what was said** - Information is locked in audio format
 - **Can't reference specific moments** - No way to quote or cite exact timestamps
 - **Takes hours to review** - Re-watching entire videos to find that one insight
@@ -38,6 +39,7 @@ python -m scenarios.transcribe podcast.mp3
 ```
 
 The tool will:
+
 1. Download/extract the audio
 2. Send it to Whisper API for transcription
 3. Format into readable paragraphs
@@ -49,6 +51,7 @@ The tool will:
 ### 1. Find a video to transcribe
 
 Choose a YouTube video or prepare an audio file:
+
 - YouTube: Copy the video URL
 - Local file: Note the path to your .mp3, .mp4, .wav, etc.
 
@@ -61,20 +64,22 @@ python -m scenarios.transcribe "https://youtube.com/watch?v=dQw4w9WgXcQ"
 ### 3. Watch the progress
 
 The tool will show:
+
 ```
 Downloading audio from YouTube...
 Extracting audio (this may take a moment)...
 Transcribing with Whisper API...
 Formatting transcript into readable paragraphs...
 Generating AI insights...
-✓ Transcript saved to: ~/amplifier/transcripts/dQw4w9WgXcQ/
+✓ Transcript saved to: ~/Code/amplifier/transcripts/dQw4w9WgXcQ/
 ```
 
 ### 4. Explore the output
 
 Navigate to your transcripts folder:
+
 ```
-~/amplifier/transcripts/dQw4w9WgXcQ/
+~/Code/amplifier/transcripts/dQw4w9WgXcQ/
 ├── audio.mp3          # The audio file (for offline listening)
 ├── transcript.md      # Readable transcript with timestamps
 └── insights.md        # AI summary and key quotes
@@ -97,6 +102,7 @@ python -m scenarios.transcribe "https://youtube.com/watch?v=..."
 ```
 
 **What happens**:
+
 - Downloads audio from YouTube
 - Creates accurate transcript
 - Formats into readable paragraphs
@@ -110,6 +116,7 @@ python -m scenarios.transcribe video1.mp4 "https://youtube.com/..." podcast.mp3
 ```
 
 **What happens**:
+
 - Processes each source sequentially
 - Saves state between each item
 - Creates separate folders for each
@@ -124,6 +131,7 @@ python -m scenarios.transcribe --resume video1.mp4 video2.mp4
 ```
 
 **What happens**:
+
 - Finds where you left off
 - Skips already completed items
 - Continues from interruption point
@@ -159,6 +167,7 @@ YouTube URL or Audio File
 ### Why It Works
 
 **Code handles the structure**:
+
 - Audio download and extraction
 - API calls and retry logic
 - File organization and caching
@@ -166,6 +175,7 @@ YouTube URL or Audio File
 - Error handling and recovery
 
 **AI handles the intelligence**:
+
 - Accurate speech transcription
 - Summary generation
 - Key quote identification
@@ -177,13 +187,15 @@ This separation means reliable processing (code) with intelligent output (AI).
 
 ### Output Locations
 
-**User Content** (`~/amplifier/transcripts/`):
+**User Content** (`~/Code/amplifier/transcripts/`):
+
 - `index.md` - Auto-generated index of all transcripts
 - `[video-id]/audio.mp3` - Preserved audio file
 - `[video-id]/transcript.md` - Readable transcript
 - `[video-id]/insights.md` - Summary and quotes
 
 **Technical Artifacts** (`.data/transcripts/`):
+
 - `[video-id]/transcript.json` - Structured data
 - `[video-id]/transcript.vtt` - WebVTT subtitles
 - `[video-id]/transcript.srt` - SRT subtitles
@@ -191,6 +203,7 @@ This separation means reliable processing (code) with intelligent output (AI).
 ### Audio Caching
 
 Audio files are automatically cached to save bandwidth:
+
 - First run downloads and saves audio
 - Subsequent runs use cached version
 - Force re-download with `--force-download`
@@ -198,6 +211,7 @@ Audio files are automatically cached to save bandwidth:
 ### Cost Estimation
 
 OpenAI Whisper API pricing (as of 2024):
+
 - $0.006 per minute of audio
 - Example: 60-minute video = $0.36
 - Cost shown before processing
@@ -209,6 +223,7 @@ OpenAI Whisper API pricing (as of 2024):
 **Problem**: Missing YouTube download dependency.
 
 **Solution**:
+
 ```bash
 make install  # or: uv add yt-dlp
 ```
@@ -218,6 +233,7 @@ make install  # or: uv add yt-dlp
 **Problem**: Audio processing tool not installed.
 
 **Solution**:
+
 - macOS: `brew install ffmpeg`
 - Ubuntu: `sudo apt-get install ffmpeg`
 - Windows: Download from ffmpeg.org
@@ -227,6 +243,7 @@ make install  # or: uv add yt-dlp
 **Problem**: File exceeds 25MB API limit.
 
 **Solution**: The tool auto-compresses. If it still fails, manually compress:
+
 ```bash
 ffmpeg -i input.wav -b:a 64k -ar 16000 output.mp3
 ```
@@ -236,6 +253,7 @@ ffmpeg -i input.wav -b:a 64k -ar 16000 output.mp3
 **Problem**: OpenAI/Anthropic API keys not configured.
 
 **Solution**: Set in `.env` file:
+
 ```
 OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...

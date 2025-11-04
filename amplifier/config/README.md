@@ -109,8 +109,8 @@ data_dir = custom_paths.data_dir
 
 ```bash
 # Set custom paths via environment
-export AMPLIFIER_DATA_DIR="~/amplifier"
-export AMPLIFIER_CONTENT_DIRS=".data/content,~/amplifier/content"
+export AMPLIFIER_DATA_DIR="~/Code/amplifier"
+export AMPLIFIER_CONTENT_DIRS=".data/content,~/Code/amplifier/content"
 
 # Run application - paths will use these values
 python -m amplifier.main

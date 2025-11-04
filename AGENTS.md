@@ -25,7 +25,7 @@ This file provides guidance to AI assistants when working with code in this repo
 
 ## Git Commit Message Guidelines
 
-When creating git commit messages, always insert the following at the end of your commit message:
+When creating git commit messages, NEVER insert the following at the end of your commit message:
 
 ```
 🤖 Generated with [Amplifier](https://github.com/microsoft/amplifier)
